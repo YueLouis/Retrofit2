@@ -16,21 +16,22 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private CategoryAdapter adapter;
-    private List<Category> categoryList;
+    private RecyclerView rcvCategory;
+    private ArrayList<Category> categoryList;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.rcvCategory);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rcvCategory = findViewById(R.id.rcvCategory);
 
         categoryList = new ArrayList<>();
-        adapter = new CategoryAdapter(this, categoryList);
-        recyclerView.setAdapter(adapter);
+        categoryAdapter = new CategoryAdapter(this, categoryList);
+
+        rcvCategory.setLayoutManager(new LinearLayoutManager(this));
+        rcvCategory.setAdapter(categoryAdapter);
 
         loadCategories();
     }
@@ -41,14 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+            public void onResponse(Call<List<Category>> call,
+                                   Response<List<Category>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList.clear();
-                    categoryList.addAll(response.body());
-                    adapter.notifyDataSetChanged();
+                    categoryList.addAll(response.body());   // lấy HẾT 12 category
+                    categoryAdapter.notifyDataSetChanged();
+
+                    // debug nhỏ: xem số lượng
+                    Toast.makeText(MainActivity.this,
+                            "Số category: " + categoryList.size(),
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this,
-                            "Error: " + response.code(),
+                            "Lỗi: " + response.code(),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -56,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 Toast.makeText(MainActivity.this,
-                        "Fail: " + t.getMessage(),
+                        "Gọi API thất bại: " + t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });

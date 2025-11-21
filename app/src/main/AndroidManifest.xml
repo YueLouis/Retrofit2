@@ -16,12 +16,17 @@
         android:theme="@style/Theme.Retrofit2"
         android:usesCleartextTraffic="true">
 
+        <!-- Màn chi tiết -->
+        <activity
+            android:name=".CategoryDetailActivity"
+            android:exported="false" />
+
+        <!-- Màn chính -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

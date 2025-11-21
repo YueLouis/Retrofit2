@@ -9,7 +9,7 @@ public class Category implements Serializable {
 
     @SerializedName("id")
     @Expose
-    private int id;
+    private String id;
 
     @SerializedName("name")
     @Expose
@@ -23,11 +23,19 @@ public class Category implements Serializable {
     @Expose
     private String description;
 
-    public int getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public String getImages() { return images; }
+    public String getImages() {
+        return images;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 }

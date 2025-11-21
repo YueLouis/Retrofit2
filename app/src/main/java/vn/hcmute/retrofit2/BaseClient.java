@@ -1,5 +1,7 @@
 package vn.hcmute.retrofit2;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -7,24 +9,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseClient {
 
-    private static Retrofit retrofit = null;
+    private static OkHttpClient getClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    public static Retrofit getClient(String baseUrl) {
-        if (retrofit == null) {
+        return new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
+    }
 
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
-                    .build();
-
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)      // phải kết thúc bằng "/"
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build();
-        }
-        return retrofit;
+    public static Retrofit getRetrofit(String baseUrl) {
+        return new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(getClient())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 }

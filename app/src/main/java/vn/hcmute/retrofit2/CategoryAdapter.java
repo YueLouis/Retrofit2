@@ -1,6 +1,7 @@
 package vn.hcmute.retrofit2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,16 +40,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.txtName.setText(category.getName());
 
-        // LOAD ẢNH VỚI GLIDE GIỐNG SLIDE
         Glide.with(context)
-                .load(category.getImages())   // chú ý dùng getImages()
+                .load(category.getImages())
                 .into(holder.imgThumb);
 
-        // XỬ LÝ CLICK GIỐNG DEMO: TOAST TÊN CATEGORY
         holder.itemView.setOnClickListener(v -> {
             Toast.makeText(context,
                     "Bạn chọn " + category.getName(),
                     Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(context, CategoryDetailActivity.class);
+            intent.putExtra("category", category);
+            context.startActivity(intent);
         });
     }
 
@@ -68,4 +71,3 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
     }
 }
-
