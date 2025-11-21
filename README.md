@@ -1,6 +1,6 @@
 # Bài tập Retrofit2 – Android
 
-Đây là bài tập cá nhân môn **An toàn mạng không dây và di động / Android Networking** sử dụng **Retrofit2** để gọi API và hiển thị dữ liệu bằng **RecyclerView**.
+Đây là bài tập cá nhân môn **Lập trình di động / Android Networking** sử dụng **Retrofit2** để gọi API và hiển thị dữ liệu bằng **RecyclerView**.
 
 ## 1. Mô tả bài toán
 
