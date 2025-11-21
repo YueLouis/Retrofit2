@@ -33,26 +33,7 @@ implementation("com.github.bumptech.glide:glide:4.14.2")
 annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 ```
 
-## 3. Cấu trúc chính của project
-
-Retrofit2/
- ├─ app/
- │   ├─ src/main/java/vn/hcmute/retrofit2/
- │   │   ├─ MainActivity.java        # Gọi API, hiển thị RecyclerView
- │   │   ├─ Category.java            # Model ánh xạ JSON
- │   │   ├─ APIService.java          # Khai báo endpoint Retrofit
- │   │   ├─ BaseClient.java          # Tạo Retrofit client dùng chung
- │   │   ├─ ApiClient.java           # Cung cấp APIService với BASE_URL
- │   │   └─ CategoryAdapter.java     # Adapter cho RecyclerView
- │   └─ src/main/res/
- │       ├─ layout/activity_main.xml # RecyclerView
- │       └─ layout/item_category.xml # CardView hiển thị từng category
- └─ docs/
-     └─ screenshots/
-         ├─ anh_01.png               # Màn hình danh sách category
-         └─ anh_02.png               # Màn hình khi click và hiện Toast
-         
-## 4. Cách chạy ứng dụng
+## 3. Cách chạy ứng dụng
 Mở project bằng Android Studio.
 
 Đảm bảo đã bật Internet trên thiết bị / emulator.
